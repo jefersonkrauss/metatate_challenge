@@ -1,0 +1,12 @@
+<% if @invited_user.present? %>
+  <h1>Olá <%=@invited_user.name %>,</h1>
+<% else %>
+  <h1>Olá,</h1>
+<%end %>
+
+<p>
+  Você foi convidado por <b><%= @user.name %></b> para participar de um bolão no Sou Loto.<br>
+</p>
+<p>Clique <a href="<%=@sweepstake_invite.link %>">aqui</a> para aceitar, ou simplesmente ignore este e-mail</p>
+
+<p>Esta mensagem é uma mensagem automática, por favor não responda este e-mail.</p>

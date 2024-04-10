@@ -1,0 +1,28 @@
+# Ruby on Rails
+# Ignore arquivos temporários gerados pelo sistema
+*.swp
+*.db
+*.log
+*.sqlite3
+
+# Ignore arquivos de dependências
+/vendor/
+/node_modules/
+
+# Ignore o ambiente de desenvolvimento local
+/config/database.yml
+/config/master.key
+/config/credentials.yml.enc
+/tmp/
+
+# React
+# Ignore arquivos de construção e recursos compilados
+/build/
+/dist/
+/.cache/
+
+# Ignore dependências instaladas
+/node_modules/
+
+# Ignore arquivos de ambiente local
+.env
