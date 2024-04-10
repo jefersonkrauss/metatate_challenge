@@ -41,3 +41,7 @@ Open your browser and visit `http://localhost:3001` to see the application runni
    * `Task_Manager_Challenge_Dev.postman_environment.json`
 5. Click Open or Import to import the selected files.
 6. You should now see the imported collections and environment variables in the left sidebar of Postman.
+
+## ER Diagram
+
+![ER Diagram](ER_Diagram.png)

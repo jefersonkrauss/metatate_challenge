@@ -26,3 +26,8 @@
 
 # Ignore arquivos de ambiente local
 .env
+/.idea/.gitignore
+/.idea/metatate_challenge.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
