@@ -16,13 +16,19 @@ This is a challenge project from Metatate and consists of creating a Kanban-styl
 
 ## Installation
 
-1. Clone the repository: `git clone git@github.com:jefersonkrauss/metatate_challenge.git`
-2. Navigate to the project folder: `cd metatate_challenge`
-3. Run docker compose: `docker compose up -d`
+```bash
+git clone git@github.com:jefersonkrauss/metatate_challenge.git
+cd metatate_challenge
+docker compose up -d
+```
+
+### After running the development servers, the project should be accessible at
+- Frontend `http://localhost:3000`
+- Backend `http://localhost:3001`
 
 ## Usage
 
-Open your browser and visit `http://localhost:3001` to see the application running. (TO DO)
+Open your browser and visit `http://localhost:3001` to see the application running.
 
 ### You can log in with the test user below:
 
