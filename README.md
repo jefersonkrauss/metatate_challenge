@@ -7,7 +7,9 @@ This is a challenge project from Metatate and consists of creating a Kanban-styl
 - Ruby version 2.7.2
 - Rails version 7.1.3
 - PostgreSQL
-- ReactJs (TO DO)
+- ReactJs 11.11.4
+- NodeJs (20.11.0)
+- npm (10.2.4)
 
 ## Prerequisites
 
