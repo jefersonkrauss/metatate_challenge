@@ -15,28 +15,42 @@ services:
     ports:
       - "1080:1080"
       - "1025:1025"
-#  web:
-#    build:
-#      context: .
-#      args:
-#        environment: development
-#      dockerfile: Dockerfile
-#    volumes:
-#      - .:/app
-#    env_file:
-#      - .env
-#    ports:
-#      - "3000:3000"
-#    environment:
-#      RAILS_ENV: development
-#      DATABASE_HOST: postgres
-#      DATABASE_NAME: apostas_development
-#      DATABASE_USER: apostas
-#      DATABASE_PASSWORD: password
-#    depends_on:
-#      - postgres
-#    links:
-#      - postgres
+  task-manager-backend:
+    build:
+      context: ./task-manager-backend-ruby-on-rails
+      target: development
+    volumes:
+      - ./task-manager-backend-ruby-on-rails:/app
+    env_file:
+      - ./task-manager-backend-ruby-on-rails/.env
+    ports:
+      - "3001:3001"
+    environment:
+      RAILS_ENV: development
+      PORT: 3001
+      DATABASE_HOST: postgres
+      DATABASE_NAME: task_manager_development
+      DATABASE_USER: task_manager
+      DATABASE_PASSWORD: password
+      MAIL_HOST: maildev
+      MAIL_PORT: 1025
+    depends_on:
+      - postgres
+    links:
+      - postgres
+  task-manager-frontend:
+      build:
+        context: ./task-manager-frontend-react
+        target: development
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./task-manager-frontend-react:/app
+        - /app/node_modules
+      environment:
+        - NODE_ENV=development
+        - BACKEND_HOST=task-manager-backend
+        - BACKEND_PORT=3001
 
 volumes:
   db_data:
