@@ -101,9 +101,9 @@ GEM
     crass (1.0.6)
     csv (3.1.2)
     date (3.3.4)
-    debase (2.3.13)
-      debase-ruby_core_source (~> 3.3.1)
-    debase-ruby_core_source (3.3.1)
+    debug (1.9.2)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     devise (4.9.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -139,9 +139,6 @@ GEM
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    httparty (0.17.3)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -168,14 +165,10 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
-    mime-types (3.5.2)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2024.0206)
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
     minitest (5.21.2)
     msgpack (1.7.2)
-    multi_xml (0.6.0)
     mutex_m (0.2.0)
     net-imap (0.3.7)
       date
@@ -271,8 +264,6 @@ GEM
     rspec-support (3.13.0)
     rspec_junit_formatter (0.6.0)
       rspec-core (>= 2, < 4, != 2.12.0)
-    ruby-debug-ide (0.7.3)
-      rake (>= 0.8.1)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     selenium-webdriver (4.9.0)
@@ -335,13 +326,12 @@ DEPENDENCIES
   bootsnap
   capybara
   csv
-  debase
+  debug
   devise
   devise-jwt
   dotenv-rails (>= 2.7.6)
   factory_bot_rails (~> 6.1.0)
   faker
-  httparty (~> 0.17.3)
   importmap-rails
   jbuilder
   jsonapi-serializer
@@ -353,13 +343,11 @@ DEPENDENCIES
   render_anywhere
   rspec-rails (~> 6.1.0)
   rspec_junit_formatter
-  ruby-debug-ide
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
   turbo-rails
-  tzinfo-data
   web-console
   webdrivers (= 5.3.0)
   wkhtmltopdf-binary
