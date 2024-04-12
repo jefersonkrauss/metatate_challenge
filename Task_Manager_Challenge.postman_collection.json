@@ -35,7 +35,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/signup",
+							"raw": "http://localhost:3001/signup",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -78,7 +78,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/login",
+							"raw": "{{host}}/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -109,7 +109,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/login",
+							"raw": "{{host}}/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -150,7 +150,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/user/info",
+							"raw": "{{host}}/api/v1/user/info",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -191,7 +191,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/logout",
+							"raw": "{{host}}/logout",
 							"protocol": "http",
 							"host": [
 								"localhost"
