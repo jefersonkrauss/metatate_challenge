@@ -152,7 +152,7 @@ export default function Layout() {
                             John Doe - johndoe@example.com
                         </Typography>
                         <Box sx={{ flexGrow: 1 }} />
-                        <ToggleColorMode color="inherit" sx={{marginLeft: 'auto'}} mode={mode} toggleColorMode={toggleColorMode}/>
+                        <ToggleColorMode color="inherit" mode={mode} toggleColorMode={toggleColorMode}/>
                         <IconButton color="inherit" sx={{marginLeft: 'auto'}}>
                             <LogoutIcon/>
                         </IconButton>
@@ -167,7 +167,7 @@ export default function Layout() {
                     </DrawerHeader>
                     <Divider/>
                     <List>
-                        {menuItems.map((item, index) => (
+                        {menuItems.map((item) => (
                             <ListItem key={item.title} disablePadding sx={{display: 'block'}}>
                                 <ListItemButton
                                     sx={{
