@@ -8,12 +8,14 @@ import Features from '@/components/mui/Features';
 import FAQ from '@/components/mui/FAQ';
 import theme, {ThemeMode} from "@/theme/theme.ts";
 import {useState} from "react";
+import {currentMode, toggleCurrentMode} from "@/services/theme-service.ts";
 
 const LandingPage = () => {
-  const [mode, setMode] = useState<ThemeMode>(ThemeMode.Dark);
+  const [mode, setMode] = useState<ThemeMode>(currentMode());
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark));
+    toggleCurrentMode()
   };
 
   return (

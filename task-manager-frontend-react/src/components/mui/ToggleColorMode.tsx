@@ -6,17 +6,19 @@ import ModeNightRoundedIcon from '@mui/icons-material/ModeNightRounded';
 
 interface ToggleColorModeProps {
   mode: PaletteMode;
+  color: string;
   toggleColorMode: () => void;
 }
 
 export default function ToggleColorMode({
   mode,
+  color = 'primary',
   toggleColorMode,
 }: ToggleColorModeProps) {
   return (
     <IconButton
       onClick={toggleColorMode}
-      color="primary"
+      color={color}
       aria-label="Theme toggle button"
       size="small"
     >

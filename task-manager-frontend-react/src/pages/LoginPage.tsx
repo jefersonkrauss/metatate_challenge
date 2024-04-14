@@ -4,7 +4,8 @@ import { useFormInput } from '../hooks/useFormInput';
 import {useAlert} from "@/context/AlertContext.tsx";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
+import {RouterPaths} from "@/constants/router-paths.ts";
 
 export const LoginPage = () => {
     const { login } = useAuth();
@@ -28,6 +29,11 @@ export const LoginPage = () => {
             showAlert(t('incorrectUserOrPassword'), 'warning', 3000)
         }
     };
+
+    const { isAuthenticated } = useAuth()
+    if (isAuthenticated) {
+        return <Navigate to={RouterPaths.admin} replace />;
+    }
 
     return (
         <Container component="main" maxWidth="xs">
