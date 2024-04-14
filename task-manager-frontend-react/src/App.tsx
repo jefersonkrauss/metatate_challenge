@@ -1,11 +1,11 @@
 import '@/App.css'
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LandingPage from "@/pages/LandingPage.tsx";
 import {AuthProvider} from "@/context/AuthContext.tsx";
 import {AlertProvider} from "@/context/AlertContext.tsx";
 import ProtectedRoute from "@/components/ProtectedRoute.tsx";
-import {HomePage} from "@/pages/HomePage.tsx";
 import {LoginPage} from "@/pages/LoginPage.tsx";
+import Layout from "@/components/Layout.tsx";
 
 function App() {
     return (
@@ -16,9 +16,8 @@ function App() {
                         <Route path="/" element={<LandingPage/>}/>
                         <Route path="/login" element={<LoginPage/>}/>
                         <Route element={<ProtectedRoute/>}>
-                            <Route path="/home" element={<HomePage/>}/>
+                            <Route path="/admin/*" element={<Layout/>}/>
                         </Route>
-                        <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </BrowserRouter>
             </AuthProvider>

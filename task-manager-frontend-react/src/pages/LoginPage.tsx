@@ -22,7 +22,7 @@ export const LoginPage = () => {
             if (!password.value) return;
 
             await login(email.value, password.value);
-            navigate('/home');
+            navigate('/admin');
         } catch (error) {
             setError(true)
             showAlert(t('incorrectUserOrPassword'), 'warning', 3000)

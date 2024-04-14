@@ -18,7 +18,7 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User>(null!);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(authService.isAuthenticated);
 
     useEffect(() => {
         const token = localStorage.getItem(UserSessionKeys.authToken);
@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         try {
             const data = await authService.login({ email, password });
             setIsAuthenticated(true)
-            setUser(data);
+            setUser(data!);
         } catch (error) {
             console.error('Login failed:', error);
             throw error;

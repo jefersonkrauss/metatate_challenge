@@ -22,16 +22,23 @@ export const login = async (loginData: LoginData) => {
         const data: Data = { user: loginData }
         const response = await axiosInstance.post<BeResponse<User>>(`/login`, data);
 
+        const beResponse = response.data;
+        let user = undefined
+
         if (response.status === 200) {
+            user = camelizeKeys<User>(beResponse.data) as User;
             localStorage.setItem(UserSessionKeys.authToken, JSON.stringify(response.headers.authorization));
-            localStorage.setItem(UserSessionKeys.user, JSON.stringify(response.data));
+            localStorage.setItem(UserSessionKeys.user, JSON.stringify(user));
         }
-        return camelizeKeys<User>(response.data.data) as User;
+
+        return user;
     } catch (error) {
         console.log(error);
         throw error
     }
 };
+
+export const isAuthenticated = () => !!localStorage.getItem(UserSessionKeys.authToken)
 
 export const logout = () => {
     localStorage.removeItem(UserSessionKeys.authToken);
