@@ -13,15 +13,22 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
+    "axios": "^1.6.8",
+    "humps": "^2.0.1",
+    "i18next": "^23.11.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^14.1.0",
+    "react-router-dom": "^6.22.3",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^15.0.1",
     "@testing-library/user-event": "^14.5.2",
+    "@types/humps": "^2.0.6",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",

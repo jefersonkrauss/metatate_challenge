@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    },
     "esModuleInterop": true,
     "target": "ES2020",
     "useDefineForClassFields": true,
