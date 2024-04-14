@@ -49,8 +49,9 @@ services:
         - /app/node_modules
       environment:
         - NODE_ENV=development
-        - BACKEND_HOST=task-manager-backend
-        - BACKEND_PORT=3001
+        - VITE_API_URL=http://localhost:3001
+      depends_on:
+        - task-manager-backend
 
 volumes:
   db_data:
