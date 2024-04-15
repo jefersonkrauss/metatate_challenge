@@ -5,11 +5,12 @@
 #  id                  :bigint           not null, primary key
 #  description         :text
 #  is_deleted          :boolean          default(FALSE), not null
+#  position            :integer          default(1), not null
 #  title               :string           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  project_id          :bigint           not null
-#  responsible_user_id :bigint           not null
+#  responsible_user_id :bigint
 #  workflow_column_id  :bigint           not null
 #
 # Indexes

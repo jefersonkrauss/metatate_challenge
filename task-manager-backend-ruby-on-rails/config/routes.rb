@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       resources :project do
         resources :task
       end
+
+      get '/project/:project_id/board', to: 'board#show'
+      put '/project/:project_id/task/sort/columns', to: 'task#update_position'
     end
   end
 end

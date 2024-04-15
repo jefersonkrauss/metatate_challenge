@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_09_214824) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_15_151623) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,10 +30,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_214824) do
     t.bigint "workflow_column_id", null: false
     t.string "title", null: false
     t.text "description"
-    t.bigint "responsible_user_id", null: false
+    t.bigint "responsible_user_id"
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position", default: 1, null: false
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["responsible_user_id"], name: "index_tasks_on_responsible_user_id"
     t.index ["workflow_column_id"], name: "index_tasks_on_workflow_column_id"

@@ -26,6 +26,29 @@ class Api::V1::TaskController < ApplicationController
     end
   end
 
+  def update_position
+
+    params.require(:tasks).each do |m_params|
+      workflow_column_id = m_params[:workflow_column_id]
+      @workflow_column = WorkflowColumn.joins(:workflow).where(workflows: { user: user }).find_by(id: workflow_column_id)
+      raise ActiveRecord::RecordNotFound if @workflow_column.nil?
+
+      id = m_params[:id]
+      @task = Task.active.find_by(id: id, project: @project)
+      raise ActiveRecord::RecordNotFound if @task.nil?
+
+      position = m_params[:position]
+      result = @task.update(position: position, workflow_column: @workflow_column)
+
+      unless result
+        render json: @task.errors, status: :unprocessable_entity
+        return
+      end
+    end
+
+    render json: @task, status: :no_content
+  end
+
   # PATCH/PUT /api/v1/tasks/1
   def update
     if @task.update(task_params)
@@ -45,12 +68,12 @@ class Api::V1::TaskController < ApplicationController
 
   def set_project
     @project = Project.find_by(id: task_params[:project_id], user: user)
-    render json: {}, status: :unauthorized unless @project
+    render json: {}, status: :forbidden unless @project
   end
 
   def validate_workflow_column
     @workflow_column = WorkflowColumn.joins(:workflow).where(workflows: { user: user }).find_by(id: task_params[:workflow_column_id])
-    render json: {}, status: :unauthorized if @workflow_column.blank? || @workflow_column.workflow_id != @project.workflow_id
+    render json: {}, status: :forbidden if @workflow_column.blank? || @workflow_column.workflow_id != @project.workflow_id
   end
 
   def set_task
@@ -59,7 +82,7 @@ class Api::V1::TaskController < ApplicationController
   end
 
   def task_params
-    params.permit(:title, :description, :project_id, :workflow_column_id, :responsible_user_id)
+    params.permit(:id, :title, :description, :project_id, :workflow_column_id, :responsible_user_id, :position)
   end
 
 end

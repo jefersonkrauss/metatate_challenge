@@ -5,11 +5,12 @@
 #  id                  :bigint           not null, primary key
 #  description         :text
 #  is_deleted          :boolean          default(FALSE), not null
+#  position            :integer          default(1), not null
 #  title               :string           not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  project_id          :bigint           not null
-#  responsible_user_id :bigint           not null
+#  responsible_user_id :bigint
 #  workflow_column_id  :bigint           not null
 #
 # Indexes
@@ -27,7 +28,13 @@
 class Task < ApplicationRecord
   belongs_to :project
   belongs_to :workflow_column
-  belongs_to :responsible_user, class_name: 'User'
+  belongs_to :responsible_user, class_name: 'User', optional: true
 
   scope :active, -> { where(is_deleted: false) }
+  scope :ordered, -> { order(position: :asc) }
+
+  def responsible
+    return if responsible_user.blank?
+    UserSerializer.new(responsible_user).attributes
+  end
 end

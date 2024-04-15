@@ -23,4 +23,5 @@
 class Project < ApplicationRecord
   belongs_to :user
   belongs_to :workflow
+  has_many :tasks
 end

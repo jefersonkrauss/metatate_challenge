@@ -18,4 +18,5 @@
 #
 class Workflow < ApplicationRecord
   belongs_to :user
+  has_many :workflow_columns
 end

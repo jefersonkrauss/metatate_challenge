@@ -19,4 +19,6 @@
 #
 class WorkflowColumn < ApplicationRecord
   belongs_to :workflow
+
+  scope :ordered, -> { order(order: :asc) }
 end
