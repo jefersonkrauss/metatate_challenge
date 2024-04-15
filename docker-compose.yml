@@ -34,6 +34,7 @@ services:
       DATABASE_PASSWORD: password
       MAIL_HOST: maildev
       MAIL_PORT: 1025
+      RAILS_MASTER_KEY: 40c913eb8b7cf6f436d21289712b73f4
     depends_on:
       - postgres
     links:
