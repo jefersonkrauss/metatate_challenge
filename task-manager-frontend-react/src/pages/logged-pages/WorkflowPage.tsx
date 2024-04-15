@@ -5,6 +5,9 @@ import {
 import { WorkflowModel } from "@/domain/model/workflow.model";
 import { createWorkflow, deleteWorkflow, getWorkflows, updateWorkflow } from "@/services/workflow-service";
 import {ChangeEvent, useEffect, useState} from "react";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const WorkflowPage = () => {
     const [workflows, setWorkflows] = useState<WorkflowModel[]>([]);
@@ -21,7 +24,8 @@ export const WorkflowPage = () => {
         setWorkflows(data);
     };
 
-    const handleOpen = (workflow?: WorkflowModel): void => {
+    const handleOpen = (event: MouseEvent, workflow?: WorkflowModel): void => {
+        event.stopPropagation();
         setIsEdit(Boolean(workflow));
         setCurrentWorkflow(workflow ?? {});
         setOpen(true);
@@ -42,7 +46,8 @@ export const WorkflowPage = () => {
         handleClose();
     };
 
-    const handleDelete = async (id: number): Promise<void> => {
+    const handleDelete = async (event: MouseEvent, id: number): Promise<void> => {
+        event.stopPropagation();
         await deleteWorkflow(id);
         await fetchWorkflows();
     };
@@ -74,8 +79,12 @@ export const WorkflowPage = () => {
                             <TableRow key={workflow.id} hover>
                                 <TableCell component="th" scope="row">{workflow.name}</TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={() => handleOpen(workflow)}>Edit</Button>
-                                    <Button onClick={() => handleDelete(workflow.id)}>Delete</Button>
+                                    <IconButton onClick={(event) => handleOpen(event, workflow)}>
+                                        <EditIcon />
+                                    </IconButton>
+                                    <IconButton onClick={(event) => handleDelete(event, workflow.id)} color="error">
+                                        <DeleteIcon />
+                                    </IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}

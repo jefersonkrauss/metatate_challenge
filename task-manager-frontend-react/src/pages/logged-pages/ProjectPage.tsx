@@ -1,28 +1,33 @@
 import {
     Box,
     Button,
-    TextField,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
-    Typography,
+    MenuItem,
+    Paper,
+    Select,
     Table,
     TableBody,
     TableCell,
     TableContainer,
     TableHead,
     TableRow,
-    Paper,
-    MenuItem, Select
+    TextField,
+    Typography
 } from '@mui/material';
-import { useAuth } from "@/context/AuthContext";
+import {useAuth} from "@/context/AuthContext";
 import {ChangeEvent, useEffect, useState} from "react";
 import {ProjectModel} from "@/domain/model/project.model.ts";
 import {createProject, deleteProject, getProjects, updateProject} from "@/services/project.service.ts";
 import {getWorkflows} from "@/services/workflow-service.ts";
 import {WorkflowModel} from "@/domain/model/workflow.model.ts";
 import {formatDate} from "@/utils/date.util.ts";
+import {useNavigate} from "react-router-dom";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ProjectPage = () => {
     const [projects, setProjects] = useState<ProjectModel[]>([]);
@@ -30,6 +35,7 @@ export const ProjectPage = () => {
     const [open, setOpen] = useState<boolean>(false);
     const [currentProject, setCurrentProject] = useState<ProjectModel | Partial<ProjectModel>>({});
     const { user } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!user) return;
@@ -47,9 +53,14 @@ export const ProjectPage = () => {
         setWorkflows(data);
     };
 
-    const handleOpen = (project?: ProjectModel): void => {
+    const handleOpen = (event: MouseEvent, project?: ProjectModel): void => {
+        event.stopPropagation();
         setCurrentProject(project ?? {});
         setOpen(true);
+    };
+
+    const handleBoard = (id: number): void => {
+        navigate('/admin/project/board/' + id);
     };
 
     const handleClose = (): void => {
@@ -67,7 +78,8 @@ export const ProjectPage = () => {
         handleClose();
     };
 
-    const handleDelete = async (id: number): Promise<void> => {
+    const handleDelete = async (event: MouseEvent, id: number): Promise<void> => {
+        event.stopPropagation();
         await deleteProject(id);
         await fetchProjects();
     };
@@ -109,15 +121,19 @@ export const ProjectPage = () => {
                     </TableHead>
                     <TableBody>
                         {projects.map((project) => (
-                            <TableRow key={project.id} hover>
+                            <TableRow key={project.id} hover onClick={() => handleBoard(project.id)}>
                                 <TableCell>{project.name}</TableCell>
                                 <TableCell>{project.description}</TableCell>
                                 <TableCell>{workflows.find(w => w.id === project.workflowId)?.name}</TableCell>
                                 <TableCell>{formatDate(project.createdAt)}</TableCell>
                                 <TableCell>{formatDate(project.updatedAt)}</TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={() => handleOpen(project)}>Edit</Button>
-                                    <Button onClick={() => handleDelete(project.id)}>Delete</Button>
+                                    <IconButton onClick={(event) => handleOpen(event, project)}>
+                                        <EditIcon />
+                                    </IconButton>
+                                    <IconButton onClick={(event) => handleDelete(event, project.id)} color="error">
+                                        <DeleteIcon />
+                                    </IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {CSSObject, styled, Theme, ThemeProvider, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -29,6 +29,9 @@ import Link from "@mui/material/Link";
 import {WorkflowPage} from "@/pages/logged-pages/WorkflowPage.tsx";
 import {WorkflowColumnPage} from "@/pages/logged-pages/WorkflowColumnPage.tsx";
 import {ProjectPage} from "@/pages/logged-pages/ProjectPage.tsx";
+import BoardPage from "@/pages/logged-pages/BoardPage.tsx";
+import {useAuth} from "@/context/AuthContext.tsx";
+import {User} from "@/domain/model/user.model.ts";
 
 const drawerWidth = 240;
 
@@ -109,15 +112,19 @@ export default function Layout() {
     const themeAux = useTheme();
     const [open, setOpen] = useState(false);
     const [mode, setMode] = useState<ThemeMode>(currentMode());
+    const { user, logout, isAuthenticated } = useAuth()
+
+    useEffect(() => {
+    }, [user, theme, mode]);
 
     const toggleColorMode = () => {
         setMode((prev) => (prev === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark));
         toggleCurrentMode()
     };
 
-    const menuWorkflow = {title: 'Workflow', path: 'workflow', icon: <ViewCozyIcon />};
-    const menuWorkflowColumn = {title: 'Workflow Column', path: 'workflow-column', icon: <ViewColumnIcon />};
-    const menuProject = {title: 'Project', path: 'project', icon: <WorkOutlineIcon />};
+    const menuWorkflow = {title: 'Workflow', path: '/admin/workflow', icon: <ViewCozyIcon />};
+    const menuWorkflowColumn = {title: 'Workflow Column', path: '/admin/workflow-column', icon: <ViewColumnIcon />};
+    const menuProject = {title: 'Project', path: '/admin/project', icon: <WorkOutlineIcon />};
     const menuItems = [menuWorkflow, menuWorkflowColumn, menuProject]
 
     const handleDrawerOpen = () => {
@@ -127,6 +134,10 @@ export default function Layout() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    if (!user) {
+        return <></>
+    }
 
     return (
         <ThemeProvider theme={theme(mode)}>
@@ -146,13 +157,13 @@ export default function Layout() {
                         >
                             <MenuIcon/>
                         </IconButton>
-                        <Avatar sx={{mr: 2}} src="/static/images/avatar/1.jpg"/>
+                        <Avatar sx={{mr: 2}} src={'data:image/jpeg;base64,' + user.avatar}/>
                         <Typography variant="h6" noWrap component="div">
-                            John Doe - johndoe@example.com
+                            {user!.name}
                         </Typography>
                         <Box sx={{ flexGrow: 1 }} />
                         <ToggleColorMode color="inherit" mode={mode} toggleColorMode={toggleColorMode}/>
-                        <IconButton color="inherit" sx={{marginLeft: 'auto'}}>
+                        <IconButton color="inherit" sx={{marginLeft: 'auto'}} onClick={logout}>
                             <LogoutIcon/>
                         </IconButton>
 
@@ -202,6 +213,7 @@ export default function Layout() {
                                 <Route path="workflow" element={<WorkflowPage/>}/>
                                 <Route path="workflow-column" element={<WorkflowColumnPage />}/>
                                 <Route path="project" element={<ProjectPage/>}/>
+                                <Route path="project/board/:projectId" element={<BoardPage/>}/>
                             </Routes>
                         </CardContent>
                     </Card>

@@ -13,6 +13,9 @@ import {
     updateWorkflowColumn
 } from "@/services/workflow-column.service.ts";
 import {useAlert} from "@/context/AlertContext.tsx";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const WorkflowColumnPage = () => {
     const [columns, setColumns] = useState<WorkflowColumnModel[]>([]);
@@ -36,7 +39,8 @@ export const WorkflowColumnPage = () => {
         setWorkflows(data);
     };
 
-    const handleOpen = (column?: WorkflowColumnModel): void => {
+    const handleOpen = (event: MouseEvent, column?: WorkflowColumnModel): void => {
+        event.stopPropagation();
         setCurrentColumn(column ?? {});
         setOpen(true);
     };
@@ -61,7 +65,8 @@ export const WorkflowColumnPage = () => {
         handleClose();
     };
 
-    const handleDelete = async (id: number): Promise<void> => {
+    const handleDelete = async (event: MouseEvent, id: number): Promise<void> => {
+        event.stopPropagation();
         await deleteWorkflowColumn(id);
         await fetchColumns();
     };
@@ -101,8 +106,12 @@ export const WorkflowColumnPage = () => {
                                 <TableCell>{column.order}</TableCell>
                                 <TableCell>{workflows.find(w => w.id === column.workflowId)?.name}</TableCell>
                                 <TableCell align="right">
-                                    <Button onClick={() => handleOpen(column)}>Edit</Button>
-                                    <Button onClick={() => handleDelete(column.id) }>Delete</Button>
+                                    <IconButton onClick={(event) => handleOpen(event, column)}>
+                                        <EditIcon />
+                                    </IconButton>
+                                    <IconButton onClick={(event) => handleDelete(event, column.id)} color="error">
+                                        <DeleteIcon />
+                                    </IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}

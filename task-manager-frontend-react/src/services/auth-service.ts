@@ -43,7 +43,8 @@ export const isAuthenticated = () => !!localStorage.getItem(UserSessionKeys.auth
 
 export const getUser = () => {
     const userString = localStorage.getItem(UserSessionKeys.user)
-    return userString ? (JSON.parse(userString) as User) : null
+    const data = userString ? JSON.parse(userString) : null
+    return data ? data?.user as User : null;
 }
 
 export const logout = () => {
