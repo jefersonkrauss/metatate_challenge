@@ -21,8 +21,6 @@ services:
       target: development
     volumes:
       - ./task-manager-backend-ruby-on-rails:/app
-    env_file:
-      - ./task-manager-backend-ruby-on-rails/.env
     ports:
       - "3001:3001"
     environment:
