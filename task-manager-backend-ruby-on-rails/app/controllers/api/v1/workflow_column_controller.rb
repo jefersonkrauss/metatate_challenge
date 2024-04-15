@@ -47,7 +47,7 @@ class Api::V1::WorkflowColumnController < ApplicationController
 
   def validate_workflow
     workflow = Workflow.find_by(id: workflow_column_params[:workflow_id], user: user)
-    render json: {}, status: :unauthorized unless workflow
+    render json: {}, status: :forbidden unless workflow
   end
 
   # Only allow a trusted parameter "white list" through.

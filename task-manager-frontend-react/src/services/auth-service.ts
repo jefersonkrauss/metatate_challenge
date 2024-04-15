@@ -27,7 +27,8 @@ export const login = async (loginData: LoginData) => {
 
         if (response.status === 200) {
             user = camelizeKeys<User>(beResponse.data) as User;
-            localStorage.setItem(UserSessionKeys.authToken, JSON.stringify(response.headers.authorization));
+            const token = response.headers.authorization as string;
+            localStorage.setItem(UserSessionKeys.authToken, token);
             localStorage.setItem(UserSessionKeys.user, JSON.stringify(user));
         }
 
@@ -39,6 +40,11 @@ export const login = async (loginData: LoginData) => {
 };
 
 export const isAuthenticated = () => !!localStorage.getItem(UserSessionKeys.authToken)
+
+export const getUser = () => {
+    const userString = localStorage.getItem(UserSessionKeys.user)
+    return userString ? (JSON.parse(userString) as User) : null
+}
 
 export const logout = () => {
     localStorage.removeItem(UserSessionKeys.authToken);

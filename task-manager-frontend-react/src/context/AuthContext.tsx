@@ -4,7 +4,7 @@ import {User} from "@/domain/model/user.model.ts";
 import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 
 interface AuthContextType {
-    user: User;
+    user: User | null;
     isAuthenticated: boolean;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
@@ -17,13 +17,22 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-    const [user, setUser] = useState<User>(null!);
+    const [user, setUser] = useState<User | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState(authService.isAuthenticated);
 
     useEffect(() => {
         const token = localStorage.getItem(UserSessionKeys.authToken);
         setIsAuthenticated(!!token)
     }, [])
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            const user = authService.getUser()
+            setUser(user);
+        } else {
+            setUser(null);
+        }
+    }, []);
 
     const login = async (email: string, password: string) => {
         try {
@@ -38,7 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const logout = () => {
         setIsAuthenticated(false)
-        setUser(null!);
+        setUser(null);
         authService.logout();
     };
 

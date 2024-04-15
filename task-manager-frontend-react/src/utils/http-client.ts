@@ -1,5 +1,6 @@
 import axios, {AxiosError, AxiosResponse, InternalAxiosRequestConfig} from 'axios';
 import {UserSessionKeys} from "@/services/auth-service.ts";
+import {RouterPaths} from "@/constants/router-paths.ts";
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL as string,
@@ -26,6 +27,9 @@ axiosInstance.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             localStorage.removeItem(UserSessionKeys.authToken);
             localStorage.removeItem(UserSessionKeys.user);
+            console.log(window.location.pathname)
+            if (window.location.pathname !== '/login' && window.location.pathname !== '/login/')
+                window.location.href = RouterPaths.login;
         }
         return Promise.reject(error);
     }

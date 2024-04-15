@@ -49,7 +49,7 @@ export const AlertProvider = ({children}: AlertProviderProps) => {
                 <Alert
                     severity={alertProps.severity}
                     onClose={hideAlert}
-                    style={{ position: 'fixed', top: 20, right: 20, zIndex: 1000, width: 'auto', maxWidth: '90%' }}
+                    style={{ position: 'fixed', top: 70, right: 20, zIndex: 1000, width: 'auto', maxWidth: '90%' }}
                 >
                     {alertProps.message}
                 </Alert>

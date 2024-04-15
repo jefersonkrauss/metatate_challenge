@@ -1,5 +1,5 @@
 export enum RouterPaths {
     landingPage = "/",
-    admin = "/admin",
-    login = "/login",
+    admin = "/admin/",
+    login = "/login/",
 }

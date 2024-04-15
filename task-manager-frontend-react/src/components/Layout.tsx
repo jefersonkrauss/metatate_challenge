@@ -21,15 +21,14 @@ import ViewCozyIcon from '@mui/icons-material/ViewCozy';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import {Avatar, Card, CardContent, PaletteMode} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
-import {HomePage} from "@/pages/logged-pages/HomePage.tsx";
-import {WorkFlow} from "@/pages/logged-pages/WorkFlow.tsx";
-import {WorkflowColumn} from "@/pages/logged-pages/WorkflowColumn.tsx";
-import {Project} from "@/pages/logged-pages/Project.tsx";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ToggleColorMode from "@/components/mui/ToggleColorMode.tsx";
 import {currentMode, toggleCurrentMode} from "@/services/theme-service.ts";
 import theme, {ThemeMode} from "@/theme/theme.ts";
 import Link from "@mui/material/Link";
+import {WorkflowPage} from "@/pages/logged-pages/WorkflowPage.tsx";
+import {WorkflowColumnPage} from "@/pages/logged-pages/WorkflowColumnPage.tsx";
+import {ProjectPage} from "@/pages/logged-pages/ProjectPage.tsx";
 
 const drawerWidth = 240;
 
@@ -131,7 +130,7 @@ export default function Layout() {
 
     return (
         <ThemeProvider theme={theme(mode)}>
-            <Box sx={{display: 'flex'}}>
+            <Box>
                 <CssBaseline/>
                 <AppBar position="fixed" open={open}>
                     <Toolbar>
@@ -159,7 +158,7 @@ export default function Layout() {
 
                     </Toolbar>
                 </AppBar>
-                <Drawer variant="permanent" open={open}>
+                <Drawer variant="permanent" open={open} >
                     <DrawerHeader>
                         <IconButton onClick={handleDrawerClose}>
                             {themeAux.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
@@ -199,10 +198,10 @@ export default function Layout() {
                     <Card raised sx={{margin: 2}}>
                         <CardContent>
                             <Routes>
-                                <Route path="/" element={<HomePage/>}/>
-                                <Route path="workflow" element={<WorkFlow/>}/>
-                                <Route path="workflow-column" element={<WorkflowColumn/>}/>
-                                <Route path="project" element={<Project/>}/>
+                                <Route path="/" element={<WorkflowPage/>}/>
+                                <Route path="workflow" element={<WorkflowPage/>}/>
+                                <Route path="workflow-column" element={<WorkflowColumnPage />}/>
+                                <Route path="project" element={<ProjectPage/>}/>
                             </Routes>
                         </CardContent>
                     </Card>
