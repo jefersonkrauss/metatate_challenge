@@ -11,6 +11,15 @@ This is a challenge project from Metatate and consists of creating a Kanban-styl
 - NodeJs (20.11.0)
 - npm (10.2.4)
 
+## Main React Libraries
+- Vite - Provides a Rich and Compatible Ecosystem
+- Material UI (MUI) - UI Components to use
+- react-beautiful-dnd - (drag and drop) and easy to use
+- Axios - Make Http Requests - Well-known and easy to use, create interceptors
+- i18next - Create internationalization and centralize phraseologies in one place.
+- Jest (Unit Tests)
+- Testing Library (Unit Tests)
+
 ## Prerequisites
 
 - Docker

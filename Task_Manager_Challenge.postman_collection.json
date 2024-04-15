@@ -18,7 +18,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -35,12 +36,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/signup",
-							"protocol": "http",
+							"raw": "{{host}}/signup",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"signup"
 							]
@@ -79,11 +78,9 @@
 						},
 						"url": {
 							"raw": "{{host}}/login",
-							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"login"
 							]
@@ -110,11 +107,9 @@
 						},
 						"url": {
 							"raw": "{{host}}/login",
-							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"login"
 							]
@@ -151,11 +146,9 @@
 						},
 						"url": {
 							"raw": "{{host}}/api/v1/user/info",
-							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"api",
 								"v1",
@@ -192,11 +185,9 @@
 						},
 						"url": {
 							"raw": "{{host}}/logout",
-							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"logout"
 							]
@@ -869,6 +860,48 @@
 					"response": []
 				},
 				{
+					"name": "Sort Columns",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"tasks\": [\n        {\n            \"id\": 1,\n            \"title\": \"My Task updated\",\n            \"description\": \"My Task Description updated\",\n            \"workflow_column_id\": 2,\n            \"responsible_user_id\": 3,\n            \"position\": 3\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/project/2/task/sort/columns",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"2",
+								"task",
+								"sort",
+								"columns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Destroy",
 					"request": {
 						"auth": {
@@ -895,6 +928,42 @@
 								"2",
 								"task",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Board",
+			"item": [
+				{
+					"name": "Show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/project/2/board",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"project",
+								"2",
+								"board"
 							]
 						}
 					},
