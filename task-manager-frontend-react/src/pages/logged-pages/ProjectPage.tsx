@@ -104,7 +104,7 @@ export const ProjectPage = () => {
                     <Typography variant="h4" sx={{ mb: 2, textAlign: 'left' }}>Project</Typography>
                 </Box>
                 <Box sx={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
-                    <Button variant="contained" onClick={() => handleOpen()} sx={{ mb: 2 }}>Create New Project</Button>
+                    <Button variant="contained" onClick={(event) => handleOpen(event)} sx={{ mb: 2 }}>Create New Project</Button>
                 </Box>
             </Box>
             <TableContainer component={Paper}>

@@ -86,7 +86,7 @@ export const WorkflowColumnPage = () => {
                     <Typography variant="h4" sx={{ mb: 2, textAlign: 'left' }}>Workflow Columns</Typography>
                 </Box>
                 <Box sx={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
-                    <Button variant="contained" onClick={() => handleOpen()} sx={{ mb: 2 }}>Create New Workflow Column</Button>
+                    <Button variant="contained" onClick={(event) => handleOpen(event)} sx={{ mb: 2 }}>Create New Workflow Column</Button>
                 </Box>
             </Box>
             <TableContainer component={Paper} sx={{ mt: 3 }}>
